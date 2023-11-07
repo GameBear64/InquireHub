@@ -1,2 +1,7 @@
-# InquireHub
-A questions and answers platform written in Vue.js
+# Front end
+
+- Vue js
+- Tailwind
+- Material Icons
+
+> to be continued
