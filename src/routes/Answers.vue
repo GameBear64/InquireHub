@@ -7,6 +7,6 @@
     <template #side>
       <div>side</div>
     </template>
-    <div>aaaa</div>
+    <div>aaaa ANSWER</div>
   </MainLayout>
 </template>
