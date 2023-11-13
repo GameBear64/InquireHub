@@ -3,5 +3,5 @@
 </script>
 
 <template>
-  <span class="material-symbols-rounded align-sub text-base"> {{ props.icon }} </span>
+  <span class="material-symbols-rounded align-sub"> {{ props.icon }} </span>
 </template>
