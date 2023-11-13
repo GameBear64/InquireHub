@@ -1,11 +1,16 @@
 <script setup>
 import { computed, reactive } from 'vue';
+import { useRouter } from 'vue-router'
 
 import { useVuelidate } from '@vuelidate/core';
 import { email, minLength, required } from '@vuelidate/validators';
 
 import Input from '../components/Form/Input.vue';
 import Submit from '../components/Form/Submit.vue';
+
+import { useFetch } from './../utils/useFetch'
+
+const router = useRouter()
 
 const state = reactive({
   email: '',
@@ -20,10 +25,17 @@ const rules = computed(() => ({
 const v$ = useVuelidate(rules, state);
 
 const submitForm = async () => {
-  const result = await v$.value.$validate();
-  console.log('result', result);
+  const isValid = await v$.value.$validate();
+  
+  if (!isValid) return;
+
+  useFetch({url: 'login', method: 'POST', body: state, requireAuth: false}).then((data) => {
+    localStorage.setItem('hub-token', data);
+    router.push('/');
+  })
+  
 };
-</script>ne
+</script>
 
 <template>
   <div class="flex min-h-screen flex-col justify-center bg-gray-50 px-6 py-12 sm:px-6 lg:px-8">
@@ -52,9 +64,9 @@ const submitForm = async () => {
         />
         <Input
           v-model="state.password"
-          class="mt-4"
           label="Password"
           type="password"
+          placeholder="●●●●●●●●●●"
           :error="v$.password.$errors[0]?.$message"
         />
         <Submit
