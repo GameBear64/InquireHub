@@ -32,7 +32,7 @@ const routes = [
     ],
   },
   { path: '/settings', component: Settings },
-  { path: '/questions/:id?', component: Questions },
+  { path: '/questions/:id?/:answer?', component: Questions },
   { path: '/answers/:id?', component: Answers },
 
   // Weird way to match but thats what the documentation says

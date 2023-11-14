@@ -8,7 +8,6 @@ import { email, helpers,maxLength, minLength, required, sameAs } from '@vuelidat
 import Input from '../components/Form/Input.vue';
 import Submit from '../components/Form/Submit.vue';
 
-import { successSnackBar } from "./../utils/snackbars";
 import { useFetch } from './../utils/useFetch'
 
 const router = useRouter()
@@ -38,8 +37,8 @@ const submitForm = async () => {
     localStorage.setItem('hub-token', data);
     router.push('/');
   })
-  
 };
+
 </script>
 
 <template>
@@ -87,10 +86,9 @@ const submitForm = async () => {
           placeholder="●●●●●●●●●●"
           :error="v$.confirmPassword.$errors[0]?.$message"
         />
-        <Submit
-          class="mt-4"
-          label="Sign in"
-        />
+        <Submit class="mt-4">
+          Register
+        </Submit>
       </form>
     </div>
   </div>

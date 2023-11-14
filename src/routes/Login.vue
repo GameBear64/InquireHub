@@ -33,8 +33,8 @@ const submitForm = async () => {
     localStorage.setItem('hub-token', data);
     router.push('/');
   })
-  
 };
+
 </script>
 
 <template>
@@ -69,10 +69,9 @@ const submitForm = async () => {
           placeholder="●●●●●●●●●●"
           :error="v$.password.$errors[0]?.$message"
         />
-        <Submit
-          class="mt-4"
-          label="Sign in"
-        />
+        <Submit class="mt-4">
+          Sign In
+        </Submit>
       </form>
     </div>
   </div>

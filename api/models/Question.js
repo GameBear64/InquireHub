@@ -2,16 +2,16 @@ const mongoose = require('mongoose');
 
 const questionSchema = new mongoose.Schema(
   {
-    title: {
-      type: String,
-    },
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
+    title: {
+      type: String,
+    },
     body: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Message',
+      type: String,
+      required: true
     },
     answers: [
       {
