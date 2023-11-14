@@ -13,7 +13,7 @@ const answerSchema = new mongoose.Schema(
       },
     ],
   },
-  { timestamps: true}
+  { timestamps: true }
 );
 
 exports.AnswerModel = mongoose.model('Answer', answerSchema);

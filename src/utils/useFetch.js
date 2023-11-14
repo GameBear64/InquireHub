@@ -17,11 +17,11 @@ export function useFetch({ url, requireAuth = true, method, body }) {
     data = data ? JSON.parse(data) : ''
     // ==============================================
 
-    if (!res.ok) return Promise.reject({status: res.status, message: data});
+    if (!res.ok) return Promise.reject(data || res.status);
+    
     return data;
   }).catch(error => {
-    errorSnackBar(error.message);
-    // letting the next .then know there has been an error
-    return error; 
+    errorSnackBar(error);
+    return Promise.reject(error)
   })
 }

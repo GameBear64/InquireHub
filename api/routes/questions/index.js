@@ -5,7 +5,7 @@ const { joiValidate } = require('../../middleware/validation');
 
 module.exports.get = async (req, res) => {
   // TODO: pagination
-  const list = await QuestionModel.find({author: req.apiUserId});  
+  const list = await QuestionModel.find({author: req.apiUserId}).sort({ createdAt: -1 });  
 
   return res.status(200).json(list);
 } 
@@ -19,7 +19,9 @@ module.exports.post = [
     // media: joi.string().min(5).max(5242880).optional(), // 5 MB
   }),
   async (req, res) => {
-  await QuestionModel.create({ ...req.body, author: req.apiUserId });
+    // check if the user has answered at least 3 questions before asking again
+    const created = await QuestionModel.create({ ...req.body, author: req.apiUserId });
 
-  return res.status(200).json();
-}];
+    return res.status(200).json(created);
+  }
+];

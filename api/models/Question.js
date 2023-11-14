@@ -13,12 +13,18 @@ const questionSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    answers: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Answer',
-      },
-    ],
+    rejected: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    }],
+    seen: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    }],
+    answers: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Answer',
+    }],
   },
   { timestamps: true}
 );

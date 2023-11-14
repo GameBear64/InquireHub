@@ -17,7 +17,7 @@
         :name="props.label"
         :value="modelValue"
         v-bind="$attrs"
-        class="focus:shadow-outline-blue block h-28 w-full appearance-none rounded-md border border-gray-300 px-3 py-2 transition duration-150 ease-in-out placeholder:text-gray-400 focus:border-blue-300 focus:outline-none sm:text-sm sm:leading-5"
+        class="default-input h-28"
         :class="{'border-red-500 focus:border-red-200': props.error}"
         @input="emit('update:modelValue', $event.target.value)"
       />

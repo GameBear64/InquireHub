@@ -32,8 +32,8 @@ const routes = [
     ],
   },
   { path: '/settings', component: Settings },
-  { path: '/questions/:id?/:answer?', component: Questions },
-  { path: '/answers/:id?', component: Answers },
+  { path: '/questions/:id?/:answer?', alias: ['/question/:id?/:answer?'], component: Questions },
+  { path: '/answers/:id?', alias: ['/answer/:id?'], component: Answers },
 
   // Weird way to match but thats what the documentation says
   { path: '/:pathMatch(.*)*', component: NotFound } 

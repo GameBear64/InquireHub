@@ -1,19 +1,31 @@
 <script setup>
-  import { onMounted, ref } from 'vue';
+  import { onMounted, ref, shallowRef, watch } from 'vue';
+  import { useRoute } from 'vue-router'
 
-  // import { useRoute } from 'vue-router'
+  import QuestionBubble from '../components/Bubbles/QuestionBubble.vue';
+  import Chat from '../components/Chat/Chat.vue';
   import Modal from '../components/Modal.vue';
+  import Answers from '../components/QuestionPage/Answers.vue';
   import NewQuestionForm from '../components/QuestionPage/NewQuestionForm.vue';
+  import Nothing from '../components/QuestionPage/Nothing.vue';
   import { successSnackBar } from '../utils/snackbars';
   import { useFetch } from '../utils/useFetch';
 
-  // const { params } = useRoute()
+  const route = useRoute()
   
   const showModal = ref(false)
   const questionsList = ref([])
+  const rightSideView = shallowRef(Nothing)
   
+  const setRightSide = () => {    
+    rightSideView.value = route.params?.answer ? Chat : (route.params?.id ? Answers : Nothing);
+  }
+
+  watch(() => route.params, setRightSide)
+
   onMounted(() => {
-    useFetch({url: `question`}).then((data) => {
+    setRightSide();
+    useFetch({url: `questions`}).then((data) => {
       questionsList.value = data;
     })
   });
@@ -21,9 +33,8 @@
   const newQuestion = (state) => {
     showModal.value = false
 
-    useFetch({url: 'question', method: 'POST', body: state}).then((data) => {
-      if (data?.status) return;
-      
+    useFetch({url: 'questions', method: 'POST', body: state}).then((data) => {
+      questionsList.value.unshift(data)
       successSnackBar('Question asked, expect replies soon')
     })
   }
@@ -34,7 +45,7 @@
   <MainLayout>
     <template #side>
       <button
-        class="focus:shadow-outline-indigo m-auto mt-2 flex w-5/6 justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-lg font-semibold text-white transition duration-150 ease-in-out hover:bg-blue-500 focus:outline-none active:bg-indigo-700"
+        class="btn-big"
         @click="() => showModal = true"
       >
         Ask question
@@ -43,26 +54,16 @@
         v-for="question in questionsList"
         :key="question._id"
       >
-        <div class="mx-2 my-4 break-words rounded-lg border bg-white p-2 shadow-md">
-          <p
-            v-if="question?.title"
-            class="mb-2 text-lg"
-          >
-            {{ question.title }}
-          </p>
-          <p class="text-sm">
-            {{ question.body }}
-          </p>
-        </div>
+        <QuestionBubble :question="question" />
       </div>
     </template>
-    <div>aaaa</div>
+    <component :is="rightSideView" />
   </MainLayout>
   <Modal
     v-show="showModal"
     :close="() => showModal = false"
     title="Ask a new question"
-    class="w-1/3"
+    class="w-2/3 md:w-1/2 lg:w-1/3"
   >
     <NewQuestionForm @new-question="newQuestion" />
   </Modal>

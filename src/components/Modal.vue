@@ -21,7 +21,7 @@ import Icon from './Icon.vue';
     }"
   >
     <div
-      class="min-w-[20em] max-w-[60vw] rounded-lg bg-white px-4 py-3 text-slate-900"
+      class="min-w-[20em] max-w-[80vw] rounded-lg bg-white px-4 py-3 text-slate-900 lg:max-w-[60vw]"
       :class="props.class"
     >
       <div
