@@ -2,7 +2,7 @@
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router'
 
-  import AnswerBubble from '../components/Bubbles/AnswerBubble.vue';
+  import QuestionBubble from '../components/Bubbles/QuestionBubble.vue';
   import Chat from '../components/Chat/Chat.vue'
   import { useFetch } from '../utils/useFetch';
 
@@ -36,7 +36,10 @@
         v-for="answer in answerList"
         :key="answer._id"
       >
-        <AnswerBubble :question="answer" />
+        <QuestionBubble
+          :question="answer"
+          :link="`/answer/${answer?._id}`"
+        />
       </div>
     </template>
     <Chat v-if="route.params?.id" />

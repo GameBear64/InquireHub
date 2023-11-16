@@ -7,7 +7,7 @@
   <div :class="props.class">
     <label
       :for="props.label?.toLowerCase().replace(/ /g, '-')"
-      class="block text-sm font-medium leading-5 text-gray-700"
+      class="block text-sm font-medium leading-5"
     >
       {{ props.label }}
     </label>
@@ -17,7 +17,7 @@
         :name="props.label"
         :value="modelValue"
         v-bind="$attrs"
-        class="default-input h-28"
+        class="default-input h-28 resize-none"
         :class="{'border-red-500 focus:border-red-200': props.error}"
         @input="emit('update:modelValue', $event.target.value)"
       />

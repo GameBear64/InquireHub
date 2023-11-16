@@ -17,7 +17,7 @@
       >
       <label
         :for="props.label?.toLowerCase().replace(/ /g, '-')"
-        class="text-sm font-medium leading-5 text-gray-700"
+        class="text-sm font-medium leading-5"
       >
         {{ props.label }}
       </label>

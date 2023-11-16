@@ -10,7 +10,7 @@
       class="w-full"
     >
       <router-link :to="`/question/${props.question._id}/${answer._id}`">
-        <div class="my-3 break-words rounded-lg border bg-white p-2 shadow-md">
+        <div class="my-3 break-words rounded-lg border border-base-subtle bg-base p-2 shadow-md">
           <p class="text-sm">
             {{ answer.message }}
           </p>

@@ -9,7 +9,7 @@
  
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #f4f4f5;
+    background: #00000000;
 }
  
 /* Handle */
@@ -25,25 +25,25 @@
 
 @layer components {
     .btn-big {
-        @apply m-auto mt-2 flex w-5/6 justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-lg font-semibold text-white transition duration-150 ease-in-out hover:bg-blue-500 focus:outline-none active:bg-indigo-700;
+        @apply m-auto mt-2 flex w-5/6 justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-lg font-semibold text-white transition duration-150 ease-in-out hover:bg-primary-shade focus:outline-none active:bg-primary-dark;
     }
 
     .default-input {
-        @apply block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 transition duration-150 ease-in-out placeholder:text-gray-400 focus:border-blue-300 focus:outline-none sm:text-sm sm:leading-5
+        @apply block w-full appearance-none rounded-md border bg-base border-gray-300 px-3 py-2 transition duration-150 ease-in-out placeholder:text-gray-400 focus:border-primary focus:outline-none sm:text-sm sm:leading-5
     }
 }
 
-.theme-green {
-    --color-primary-50: theme('colors.lime.50');
-    --color-primary-100: theme('colors.lime.100');
-    --color-primary-200: theme('colors.lime.200');
-    --color-primary-300: theme('colors.lime.300');
-    --color-primary-400: theme('colors.lime.400');
-    --color-primary-500: theme('colors.lime.500');
-    --color-primary-600: theme('colors.lime.600');
-    --color-primary-700: theme('colors.lime.700');
-    --color-primary-800: theme('colors.lime.800');
-    --color-primary-900: theme('colors.lime.900');
+.theme-orange {
+    --color-primary-50: theme('colors.orange.50');
+    --color-primary-100: theme('colors.orange.100');
+    --color-primary-200: theme('colors.orange.200');
+    --color-primary-300: theme('colors.orange.300');
+    --color-primary-400: theme('colors.orange.400');
+    --color-primary-500: theme('colors.orange.500');
+    --color-primary-600: theme('colors.orange.600');
+    --color-primary-700: theme('colors.orange.700');
+    --color-primary-800: theme('colors.orange.800');
+    --color-primary-900: theme('colors.orange.900');
 }
 
 .theme-red {
@@ -59,6 +59,19 @@
     --color-primary-900: theme('colors.red.900');
 }
 
+.theme-green {
+    --color-primary-50: theme('colors.lime.50');
+    --color-primary-100: theme('colors.lime.100');
+    --color-primary-200: theme('colors.lime.200');
+    --color-primary-300: theme('colors.lime.300');
+    --color-primary-400: theme('colors.lime.400');
+    --color-primary-500: theme('colors.lime.500');
+    --color-primary-600: theme('colors.lime.600');
+    --color-primary-700: theme('colors.lime.700');
+    --color-primary-800: theme('colors.lime.800');
+    --color-primary-900: theme('colors.lime.900');
+}
+
 .theme-blue {
     --color-primary-50: theme('colors.blue.50');
     --color-primary-100: theme('colors.blue.100');
@@ -70,19 +83,6 @@
     --color-primary-700: theme('colors.blue.700');
     --color-primary-800: theme('colors.blue.800');
     --color-primary-900: theme('colors.blue.900');
-}
-
-.theme-orange {
-    --color-primary-50: theme('colors.orange.50');
-    --color-primary-100: theme('colors.orange.100');
-    --color-primary-200: theme('colors.orange.200');
-    --color-primary-300: theme('colors.orange.300');
-    --color-primary-400: theme('colors.orange.400');
-    --color-primary-500: theme('colors.orange.500');
-    --color-primary-600: theme('colors.orange.600');
-    --color-primary-700: theme('colors.orange.700');
-    --color-primary-800: theme('colors.orange.800');
-    --color-primary-900: theme('colors.orange.900');
 }
 
 .theme-violet {
@@ -119,7 +119,10 @@
     --base-subtle: theme('colors.neutral.300');
     --base-weak: theme('colors.neutral.500');
     --onBase: theme('colors.neutral.800');
+    --primary-light: var(--color-primary-200);
     --primary: var(--color-primary-500);
+    --primary-shade: var(--color-primary-600);
+    --primary-dark: var(--color-primary-800);
 }
 
 .theme-dark {
@@ -129,5 +132,8 @@
     --base-subtle: theme('colors.neutral.600');
     --base-weak: theme('colors.neutral.400');
     --onBase: theme('colors.white');
-    --primary: var(--color-primary-400);
+    --primary-light: var(--color-primary-300);
+    --primary: var(--color-primary-500);
+    --primary-shade: var(--color-primary-600);
+    --primary-dark: var(--color-primary-800);
 }

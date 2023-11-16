@@ -7,7 +7,7 @@
   <div :class="props.class">
     <label
       :for="props.label?.toLowerCase().replace(/ /g, '-')"
-      class="block text-sm font-medium leading-5 text-gray-700"
+      class="block text-sm font-medium leading-5"
     >
       {{ props.label }}
     </label>

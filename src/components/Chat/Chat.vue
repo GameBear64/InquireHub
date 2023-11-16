@@ -7,7 +7,7 @@
 
   import { errorSnackBar } from '../../utils/snackbars';
   import { useFetch } from '../../utils/useFetch';
-  import { getCurrentUserId } from '../../utils/utils';
+  import MessageBubble from '../Bubbles/MessageBubble.vue';
   import ChatArea from '../Form/ChatArea.vue';
   import Icon from '../Icon.vue';
 
@@ -22,6 +22,7 @@
   const fetchQuestionDetails = () => {   
     if (!route.params.id) return;
     if (!!route.path.includes('question') && !route.params?.answer) return;
+    Object.assign(question, {})
 
     const url = route.params?.answer ? `answers/${route.params.id}/${route.params.answer}` : `answers/${route.params.id}`
     useFetch({url}).then((data) => {
@@ -74,7 +75,7 @@
 
 <template>
   <div class="flex h-full flex-col">
-    <div class="border-b-2 p-4 text-lg">
+    <div class="border-b-2 border-base-subtle p-4 text-lg">
       <h1
         v-if="question?.title"
         class="text-2xl font-semibold"
@@ -87,28 +88,22 @@
       ref="messages"
       class="flex grow flex-col gap-6 overflow-auto p-5"
     >
-      <p
+      <MessageBubble
         v-for="message in question?.answer?.messages"
         :key="message?._id"
-        class="block w-fit rounded-lg px-4 py-2 text-gray-800"
-        :class="{
-          'self-end rounded-bl rounded-br-none bg-blue-300': message?.author === getCurrentUserId(),
-          'rounded-bl-none bg-gray-300' : message?.author !== getCurrentUserId()
-        }"
-      >
-        {{ message?.body }}
-      </p>
+        :message="message"
+      />
     </div>
-    <div class="flex items-center justify-evenly bg-stone-100">
+    <div class="flex items-center justify-evenly bg-base-moderate">
       <ChatArea
         v-model="state.body" 
-        class="grow bg-stone-100"
+        class="grow bg-base-moderate"
         @keydown.enter.exact.prevent="submitForm"
       />
       <div class="h-full w-0 border border-gray-300" />
       <Icon
         icon="send"
-        class="mx-3 self-center overflow-hidden text-4xl"
+        class="mx-3 cursor-pointer self-center overflow-hidden text-4xl"
         @click="submitForm"
       />
     </div>
