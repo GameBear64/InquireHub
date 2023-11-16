@@ -1,7 +1,7 @@
-<img align="right" height="100" src="https://github.com/GameBear64/InquireHub/assets/33098072/dd238035-8238-4be3-9fbe-1e3018442f09">
+<img align="right" height="100" src="https://github.com/GameBear64/InquireHub/assets/33098072/d62c8b1e-318e-468b-a198-60f3d41bab9d">
 
 # Inquire Hub
-> catch phrase here
+> Share Your Thoughts, Spark Conversations!
   
 description here
 
