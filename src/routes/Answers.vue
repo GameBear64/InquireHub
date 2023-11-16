@@ -3,6 +3,7 @@
   import { useRoute } from 'vue-router'
 
   import AnswerBubble from '../components/Bubbles/AnswerBubble.vue';
+  import Chat from '../components/Chat/Chat.vue'
   import { useFetch } from '../utils/useFetch';
 
   const route = useRoute()
@@ -38,11 +39,12 @@
         <AnswerBubble :question="answer" />
       </div>
     </template>
-    <div v-if="route.params?.id">
-      aaaa ANSWER
-    </div>
-    <div v-else>
-      no answer selected...
+    <Chat v-if="route.params?.id" />
+    <div
+      v-else
+      class="flex h-full flex-col items-center justify-center"
+    >
+      <p>Select an answer from the ones to the right</p>
     </div>
   </MainLayout>
 </template>

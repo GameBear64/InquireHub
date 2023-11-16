@@ -6,7 +6,7 @@ export function useFetch({ url, requireAuth = true, method, body }) {
     body: JSON.stringify(body),
     headers: {
       'content-type': 'application/json',
-      jwt: requireAuth ? window.localStorage.getItem('hub-token') : '',
+      jwt: requireAuth ? window.localStorage.getItem(import.meta.env.VITE_LOCAL_STORAGE_NAME) : '',
     },
   };
 
@@ -17,6 +17,7 @@ export function useFetch({ url, requireAuth = true, method, body }) {
     data = data ? JSON.parse(data) : ''
     // ==============================================
 
+    if (res.status === 403) localStorage.removeItem(import.meta.env.VITE_LOCAL_STORAGE_NAME)
     if (!res.ok) return Promise.reject(data || res.status);
     
     return data;

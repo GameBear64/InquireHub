@@ -30,7 +30,7 @@ const submitForm = async () => {
   if (!isValid) return;
 
   useFetch({url: 'login', method: 'POST', body: state, requireAuth: false}).then((data) => {
-    localStorage.setItem('hub-token', data);
+    localStorage.setItem(import.meta.env.VITE_LOCAL_STORAGE_NAME, data);
     router.push('/');
   })
 };

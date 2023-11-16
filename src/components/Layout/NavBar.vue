@@ -4,8 +4,8 @@ import Icon from '../Icon.vue'
 </script>
 
 <template>
-  <nav class="flex h-12 w-full items-center justify-between border-b border-gray-400 bg-white px-4 shadow">       
-    <div class="flex h-11 items-center gap-5 text-blue-600">
+  <nav class="flex h-12 w-full items-center justify-between border-b border-baseLight bg-base px-4 shadow">       
+    <div class="flex h-11 items-center gap-5 text-primary">
       <router-link
         class="inline-block p-2 text-lg font-medium no-underline hover:bg-gray-100 hover:text-black"
         to="/questions"

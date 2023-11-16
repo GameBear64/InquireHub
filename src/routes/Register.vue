@@ -34,7 +34,7 @@ const submitForm = async () => {
   if (!isValid) return;
 
   useFetch({url: 'register', method: 'POST', body: state, requireAuth: false}).then((data) => {
-    localStorage.setItem('hub-token', data);
+    localStorage.setItem(import.meta.env.VITE_LOCAL_STORAGE_NAME, data);
     router.push('/');
   })
 };
@@ -53,7 +53,7 @@ const submitForm = async () => {
           class="font-medium text-blue-500 transition duration-150 ease-in-out hover:text-blue-500 focus:underline focus:outline-none"
           to="/login"
         >
-          Sign in
+          sign in to your account 
         </router-link>
       </p>
     </div>

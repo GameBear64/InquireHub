@@ -7,7 +7,7 @@
     <div class="mx-2 my-4 break-words rounded-lg border bg-white p-2 shadow-md">
       <p
         v-if="props.question?.title"
-        class="mb-2 text-lg"
+        class="mb-1 text-lg font-semibold"
       >
         {{ props.question.title }}
       </p>

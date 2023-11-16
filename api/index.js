@@ -3,13 +3,15 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
+require('dotenv').config({ path: '../.env' });
+
 const io = require('socket.io')(server, {
   cors: {
     origin: 'http://localhost:5173',
   },
 });
 
-require('dotenv').config({ path: '../.env' });
+const { checkAuth, socketAuth } = require('./middleware/auth.js');
 
 //=============== DB ================
 const mongoose = require('mongoose');
@@ -19,22 +21,19 @@ mongoose
   .then(() => console.log(`Connected to MongoDB`));
 
 //============== Socket =============
-const fileRegex = /events\/(?<cmd>\w+)\.cjs/g;
+const fileRegex = /\.\/events\/(?<cmd>\w+)\.js/g;
 const { Glob } = require('glob');
-const eventPaths = new Glob('./events/*.cjs', {});
+const eventPaths = new Glob('./events/*.js', {});
 
-io.use((socket, next) => {
-  socket.authUser = socket.handshake.auth.jwt;
-  next();
-});
+io.use(socketAuth);
 
 io.on('connection', (socket) => {
   // socket.onAny((eventName, ...args) => {
   //   console.log('[ALL] ', eventName, args);
   // });
 
-  for (const file of eventPaths) {
-    let eventFile = file.replace(fileRegex, '$<cmd>');
+  for (const file of eventPaths.found) {
+    let eventFile = file.replace(fileRegex, '$<cmd>'); 
 
     socket.on(eventFile, (...args) => {
       require(`./${file}`)({ io, socket }, ...args);
@@ -47,7 +46,6 @@ const { router } = require('express-file-routing');
 require('express-async-errors');
 
 const cors = require('cors');
-const { checkAuth } = require('./middleware/auth.js');
 
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));

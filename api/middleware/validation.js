@@ -1,8 +1,19 @@
+const ObjectId = require('mongoose').Types.ObjectId;
 const joi = require('joi');
 
-exports.allowNoBodyChanges = () => (req, res, next) => {
+/**
+ * Skips route if nothing has changed
+ */
+exports.skipIfNoChanges = () => (req, res, next) => {
   if (Object.keys(req.body).length === 0) return res.json(200);
   next();
+};
+
+/**
+ * Checks if a value is a valid ObjectID or not. (joi)
+ */
+exports.isObjectID = (value, helper) => {
+  return ObjectId.isValid(value) || helper.message('Invalid Id');
 };
 
 exports.InformationTypes = Object.freeze({

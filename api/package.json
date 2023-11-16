@@ -19,8 +19,7 @@
     "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.11.2",
-    "socket.io": "^4.7.2",
-    "socket.io-client": "^4.7.2"
+    "socket.io": "^4.7.2"
   },
   "author": "",
   "license": "ISC"

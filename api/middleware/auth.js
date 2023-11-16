@@ -41,7 +41,10 @@ exports.checkAuth = async (req, res, next) => {
 
 exports.socketAuth = async (socket, next) => {
   try {
-    socket.apiUserId = await decodeJWT(socket?.handshake?.auth?.jwt);
+    const userId = await decodeJWT(socket?.handshake?.auth?.jwt);
+    socket.apiUserId = userId
+    socket.join(userId)
+    
     next();
   } catch (err) {
     if (err.name === 'JsonWebTokenError') return socket.emit('Not Authorized');

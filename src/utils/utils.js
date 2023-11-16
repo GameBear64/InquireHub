@@ -3,7 +3,7 @@
  */
 export const getCurrentUserId = () => {
   try {
-    const token = window.localStorage.getItem('hub-token');
+    const token = window.localStorage.getItem(import.meta.env.VITE_LOCAL_STORAGE_NAME);
     return JSON.parse(atob(token.split('.')[1]))?.id;
   } catch (e) {
     return null;

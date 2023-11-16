@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, reactive } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 import MainLayout from './components/Layout/MainLayout.vue'
@@ -14,6 +14,11 @@ import App from './App.vue'
 
 import './style.css'
 
+export const themes = reactive({
+  mode: 'dark',
+  color: 'orange'
+});
+
 const routes = [
   { path: '/', redirect: { path: '/answers' } },
   { path: '/login', component: Login },
@@ -23,7 +28,7 @@ const routes = [
     children: [
       {
         path: '',
-        redirect: { path: `/profile/${getCurrentUserId()}`, }
+        redirect: { path: `/profile/${getCurrentUserId()}` }
       },
       {
         path: ':id',
@@ -46,7 +51,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const noAuthPage = ['/login', '/register'].includes(to.path);
-  const loggedIn = localStorage.getItem('hub-token');
+  const loggedIn = localStorage.getItem(import.meta.env.VITE_LOCAL_STORAGE_NAME);
 
   if (noAuthPage || loggedIn) next();
   else next('/login');

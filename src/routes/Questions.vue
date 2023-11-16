@@ -1,5 +1,5 @@
 <script setup>
-  import { onMounted, ref, shallowRef, watch } from 'vue';
+  import { onMounted, onUpdated, ref, shallowRef } from 'vue';
   import { useRoute } from 'vue-router'
 
   import QuestionBubble from '../components/Bubbles/QuestionBubble.vue';
@@ -21,7 +21,7 @@
     rightSideView.value = route.params?.answer ? Chat : (route.params?.id ? Answers : Nothing);
   }
 
-  watch(() => route.params, setRightSide)
+  onUpdated(() => setRightSide());
 
   onMounted(() => {
     setRightSide();
@@ -57,7 +57,10 @@
         <QuestionBubble :question="question" />
       </div>
     </template>
-    <component :is="rightSideView" />
+    <component
+      :is="rightSideView"
+      :question="questionsList.find(q => q._id == route.params?.id)"
+    />
   </MainLayout>
   <Modal
     v-show="showModal"

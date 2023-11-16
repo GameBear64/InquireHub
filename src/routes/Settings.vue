@@ -3,5 +3,7 @@
 </script>
 
 <template>
-  <p>hello im settings</p>
+  <p class="bg-base text-primary">
+    hello im settings
+  </p>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-  import { computed, nextTick,reactive } from 'vue';
+  import { computed, nextTick, reactive } from 'vue';
 
   import { useVuelidate } from '@vuelidate/core';
   import { maxLength, minLength, required } from '@vuelidate/validators';

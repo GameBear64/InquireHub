@@ -1,8 +1,10 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router'
 
 import NavBar from './components/Layout/NavBar.vue';
+import { socket } from './utils/socket';
+import { themes } from './main';
 
 const route = useRoute()
 const shouldShowNavbar = ref(false)
@@ -11,10 +13,15 @@ const shouldShowNavbar = ref(false)
 watch(() => route.path, () => {
   shouldShowNavbar.value = !['/login', '/register'].includes(route.path)
 })
+
+onMounted(() => socket.connect())
 </script>
 
 <template>
-  <div class="flex h-screen flex-col">
+  <div
+    :class="`theme-${themes.mode} theme-${themes.color}`"
+    class="flex h-screen flex-col bg-base text-onBase"
+  >
     <NavBar v-show="shouldShowNavbar" />
     <div class="flex-1 overflow-x-auto">
       <router-view />

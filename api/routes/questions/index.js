@@ -1,27 +1,34 @@
-const joi = require('joi');
-// const throttle = require('express-throttle');
+const ObjectId = require('mongoose').Types.ObjectId;
 const { QuestionModel } = require('../../models/Question');
-const { joiValidate } = require('../../middleware/validation');
 
 module.exports.get = async (req, res) => {
-  // TODO: pagination
-  const list = await QuestionModel.find({author: req.apiUserId}).sort({ createdAt: -1 });  
+  const list = await QuestionModel.aggregate([
+    { $match: { author: ObjectId(req.apiUserId) }},
+    { $sort: { updatedAt: -1 } },
+    {
+      $lookup: {
+        from: 'answers',
+        localField: 'answers',
+        foreignField: '_id',
+        pipeline: [
+          { $sort: { updatedAt: -1 } },
+          { $project: { message: { $slice: ['$messages', 0, 1] } } },
+          {
+            $lookup: {
+              from: 'messages',
+              localField: 'message',
+              foreignField: '_id',
+              pipeline: [{ $project: { body: 1 } }],
+              as: 'message',
+            }
+          },
+          { $unwind: '$message' }, // test unwind further
+          { $project: { message: '$message.body' } },
+        ],
+        as: 'answers',
+      }
+    },
+  ])
 
   return res.status(200).json(list);
 } 
-
-module.exports.post = [
-  // throttle?
-  joiValidate({
-    title: joi.string().min(5).max(50).optional().allow(''),
-    body: joi.string().min(5).max(2000).required(),
-    anonymous: joi.boolean(),
-    // media: joi.string().min(5).max(5242880).optional(), // 5 MB
-  }),
-  async (req, res) => {
-    // check if the user has answered at least 3 questions before asking again
-    const created = await QuestionModel.create({ ...req.body, author: req.apiUserId });
-
-    return res.status(200).json(created);
-  }
-];
