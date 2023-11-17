@@ -7,7 +7,7 @@ import Login from './routes/Login.vue'
 import Profile from './routes/Profile.vue'
 import Questions from './routes/Questions.vue'
 import Register from './routes/Register.vue'
-import Settings from './routes/Settings.vue'
+import Settings from './routes/Settings/Settings.vue'
 import NotFound from './utils/NotFound.vue'
 import { getCurrentUserId } from './utils/utils'
 import App from './App.vue'
@@ -15,8 +15,8 @@ import App from './App.vue'
 import './style.css'
 
 export const themes = reactive({
-  mode: 'dark',
-  color: 'orange'
+  mode: localStorage.getItem('theme-mode') || 'dark',
+  color: localStorage.getItem('theme-color') || 'orange'
 });
 
 const routes = [

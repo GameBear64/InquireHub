@@ -35,7 +35,7 @@ module.exports.get = [
         }
       },
       { $unwind: { path: "$answer", preserveNullAndEmptyArrays: true }},
-      { $project: { answer: { $ifNull: [ "$answer", [] ]}, title: 1, body: 1 } },
+      { $project: { answer: { $ifNull: [ "$answer", {} ]}, title: 1, body: 1 } },
     ])
 
     return res.status(200).json(question);

@@ -17,8 +17,8 @@ module.exports = async ({ io, socket }, data) => {
     const newAnswer = await AnswerModel.create({ author: socket.apiUserId, messages: [newMessage.id] })
     await question.updateOne({ $push: { answers: newAnswer } })
 
-    tempAnswer = newAnswer
+    tempAnswer = {...newAnswer.toJSON(), author: { _id: socket.apiUserId }}
   }
   
-  io.to(question.author.toString()).to(tempAnswer.author._id.toString()).emit('message', {answerId: tempAnswer._id, message: newMessage});
+  io.to(question.author.toString()).to(tempAnswer.author._id.toString()).emit('message', {answerId: tempAnswer._id.toString(), message: newMessage});
 };

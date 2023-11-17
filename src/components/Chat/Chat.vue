@@ -7,6 +7,7 @@
 
   import { errorSnackBar } from '../../utils/snackbars';
   import { useFetch } from '../../utils/useFetch';
+  import { getCurrentUserId } from '../../utils/utils';
   import MessageBubble from '../Bubbles/MessageBubble.vue';
   import ChatArea from '../Form/ChatArea.vue';
   import Icon from '../Icon.vue';
@@ -17,7 +18,6 @@
 
   const question = reactive({})
   const messages = ref(null);
-
 
   const fetchQuestionDetails = () => {   
     if (!route.params.id) return;
@@ -46,6 +46,12 @@
     fetchQuestionDetails();
     scrollToBottom();
     socket.on('message', ({answerId, message}) => {
+      // if its the first message in the chat, the answer id had to be generated on the server
+      if (!question.answer._id && message.author === getCurrentUserId()) {
+        question.answer._id = answerId
+        question.answer.messages = []
+      }
+
       if (question.answer._id === answerId) {
         question.answer.messages.push(message)
       }

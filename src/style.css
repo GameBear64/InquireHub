@@ -31,6 +31,11 @@
     .default-input {
         @apply block w-full appearance-none rounded-md border bg-base border-gray-300 px-3 py-2 transition duration-150 ease-in-out placeholder:text-gray-400 focus:border-primary focus:outline-none sm:text-sm sm:leading-5
     }
+
+    .text-border-white {
+        color: theme('colors.black');
+        text-shadow: 1px 1px theme('colors.white'), -1px -1px theme('colors.white');
+    }
 }
 
 .theme-orange {
@@ -60,16 +65,16 @@
 }
 
 .theme-green {
-    --color-primary-50: theme('colors.lime.50');
-    --color-primary-100: theme('colors.lime.100');
-    --color-primary-200: theme('colors.lime.200');
-    --color-primary-300: theme('colors.lime.300');
-    --color-primary-400: theme('colors.lime.400');
-    --color-primary-500: theme('colors.lime.500');
-    --color-primary-600: theme('colors.lime.600');
-    --color-primary-700: theme('colors.lime.700');
-    --color-primary-800: theme('colors.lime.800');
-    --color-primary-900: theme('colors.lime.900');
+    --color-primary-50: theme('colors.lime.100');
+    --color-primary-100: theme('colors.lime.200');
+    --color-primary-200: theme('colors.lime.300');
+    --color-primary-300: theme('colors.lime.400');
+    --color-primary-400: theme('colors.lime.500');
+    --color-primary-500: theme('colors.lime.600');
+    --color-primary-600: theme('colors.lime.700');
+    --color-primary-700: theme('colors.lime.800');
+    --color-primary-800: theme('colors.lime.900');
+    --color-primary-900: theme('colors.lime.950');
 }
 
 .theme-blue {

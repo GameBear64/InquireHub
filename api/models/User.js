@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema(
     },
     biography: {
       type: String,
-      default: '',
+      trim: true,
     },
     picture: {
       type: mongoose.Schema.Types.ObjectId,

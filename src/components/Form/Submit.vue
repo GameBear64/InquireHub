@@ -3,14 +3,13 @@
 </script>
 
 <template>
-  <div :class="props.class">
-    <span class="block w-full rounded-md">
-      <button
-        type="submit"
-        class="btn-big"
-      >
-        <slot />
-      </button>
-    </span>
-  </div>
+  <span class="block w-full rounded-md">
+    <button
+      type="submit"
+      class="btn-big"
+      :class="props.class"
+    >
+      <slot />
+    </button>
+  </span>
 </template>

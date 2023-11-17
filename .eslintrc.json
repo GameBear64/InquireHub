@@ -16,8 +16,8 @@
               ["^vue$", "^[a-z]"],
               // Packages starting with `@`
               ["^@"],
-              // Packages starting with `~`
-              ["^~"],
+              // My custom aliases
+              ["^@form"], ["^@components"], ["^@utils"],
               // Imports starting with `../`
               ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
               // Imports starting with `./`
