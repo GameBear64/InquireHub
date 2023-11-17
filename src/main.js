@@ -1,15 +1,17 @@
 import { createApp, reactive } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
-import MainLayout from './components/Layout/MainLayout.vue'
-import Answers from './routes/Answers.vue'
-import Login from './routes/Login.vue'
-import Profile from './routes/Profile.vue'
-import Questions from './routes/Questions.vue'
-import Register from './routes/Register.vue'
+import MainLayout from '@components/Layout/MainLayout.vue'
+
+import NotFound from '@utils/NotFound.vue'
+import { getCurrentUserId } from '@utils/utils'
+
+import Answers from './routes/Answers/Answers.vue'
+import Login from './routes/Login/Login.vue'
+import Profile from './routes/Profile/Profile.vue'
+import Questions from './routes/Questions/Questions.vue'
+import Register from './routes/Register/Register.vue'
 import Settings from './routes/Settings/Settings.vue'
-import NotFound from './utils/NotFound.vue'
-import { getCurrentUserId } from './utils/utils'
 import App from './App.vue'
 
 import './style.css'

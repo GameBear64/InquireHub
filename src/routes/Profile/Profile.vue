@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-import { useFetch } from '../utils/useFetch';
+import { useFetch } from '@utils/useFetch';
 
 const { params } = useRoute()
 

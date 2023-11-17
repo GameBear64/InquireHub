@@ -4,10 +4,10 @@
   import { useVuelidate } from '@vuelidate/core';
   import { maxLength, minLength, required } from '@vuelidate/validators';
 
-  import CheckBox from '../Form/CheckBox.vue';
-  import Input from '../Form/Input.vue';
-  import Submit from '../Form/Submit.vue';
-  import TextArea from '../Form/TextArea.vue';
+  import CheckBox from '@form/CheckBox.vue';
+  import Input from '@form/Input.vue';
+  import Submit from '@form/Submit.vue';
+  import TextArea from '@form/TextArea.vue';
 
   const emit = defineEmits(["newQuestion"])
 

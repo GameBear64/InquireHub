@@ -2,9 +2,10 @@
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router'
 
-  import QuestionBubble from '../components/Bubbles/QuestionBubble.vue';
-  import Chat from '../components/Chat/Chat.vue'
-  import { useFetch } from '../utils/useFetch';
+  import QuestionBubble from '@components/Bubbles/QuestionBubble.vue';
+  import Chat from '@components/Chat/Chat.vue'
+
+  import { useFetch } from '@utils/useFetch';
 
   const route = useRoute()
 
@@ -47,7 +48,7 @@
       v-else
       class="flex h-full flex-col items-center justify-center"
     >
-      <p>Select an answer from the ones to the right</p>
+      <p>Select an answer from the list to the right</p>
     </div>
   </MainLayout>
 </template>

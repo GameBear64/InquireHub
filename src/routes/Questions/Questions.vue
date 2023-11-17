@@ -2,14 +2,16 @@
   import { onMounted, onUpdated, ref, shallowRef } from 'vue';
   import { useRoute } from 'vue-router'
 
-  import QuestionBubble from '../components/Bubbles/QuestionBubble.vue';
-  import Chat from '../components/Chat/Chat.vue';
-  import Modal from '../components/Modal.vue';
-  import Answers from '../components/QuestionPage/Answers.vue';
-  import NewQuestionForm from '../components/QuestionPage/NewQuestionForm.vue';
-  import Nothing from '../components/QuestionPage/Nothing.vue';
-  import { successSnackBar } from '../utils/snackbars';
-  import { useFetch } from '../utils/useFetch';
+  import QuestionBubble from '@components/Bubbles/QuestionBubble.vue';
+  import Chat from '@components/Chat/Chat.vue';
+  import Modal from '@components/Modal.vue';
+
+  import { successSnackBar } from '@utils/snackbars';
+  import { useFetch } from '@utils/useFetch';
+
+  import Answers from './views/Answers.vue';
+  import NewQuestionForm from './views/NewQuestionForm.vue';
+  import Nothing from './views/Nothing.vue';
 
   const route = useRoute()
   
