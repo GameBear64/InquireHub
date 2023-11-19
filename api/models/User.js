@@ -24,10 +24,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    picture: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Image",
-    },
+    picture: String,
     following: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',

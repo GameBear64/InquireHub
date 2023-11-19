@@ -35,32 +35,35 @@
         <Icon icon="dark_mode" />
       </button>
     </div>
-    <p class="pb-1 text-4xl font-bold">
-      +
-    </p>
     <div class="flex gap-2">
       <button
         class="flex h-10 w-10 items-center justify-center rounded-full bg-orange-500"
+        :class="{'border-4 border-onBase' : themes?.color == 'orange'}"
         @click="() => changeThemeColor('orange')"
       />
       <button
         class="flex h-10 w-10 items-center justify-center rounded-full bg-red-500"
+        :class="{'border-4 border-onBase' : themes?.color == 'red'}"
         @click="() => changeThemeColor('red')"
       />
       <button
         class="flex h-10 w-10 items-center justify-center rounded-full bg-green-500"
+        :class="{'border-4 border-onBase' : themes?.color == 'green'}"
         @click="() => changeThemeColor('green')"
       />
       <button
         class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500"
+        :class="{'border-4 border-onBase' : themes?.color == 'blue'}"
         @click="() => changeThemeColor('blue')"
       />
       <button
         class="flex h-10 w-10 items-center justify-center rounded-full bg-violet-500"
+        :class="{'border-4 border-onBase' : themes?.color == 'violet'}"
         @click="() => changeThemeColor('violet')"
       />
       <button
         class="flex h-10 w-10 items-center justify-center rounded-full bg-pink-500"
+        :class="{'border-4 border-onBase' : themes?.color == 'pink'}"
         @click="() => changeThemeColor('pink')"
       />
     </div>

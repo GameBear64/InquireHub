@@ -5,14 +5,15 @@
   import { useVuelidate } from '@vuelidate/core';
   import { maxLength, required } from '@vuelidate/validators';
 
-  import { errorSnackBar } from '../../utils/snackbars';
-  import { useFetch } from '../../utils/useFetch';
-  import { getCurrentUserId } from '../../utils/utils';
-  import MessageBubble from '../Bubbles/MessageBubble.vue';
-  import ChatArea from '../Form/ChatArea.vue';
-  import Icon from '../Icon.vue';
+  import ChatArea from '@form/ChatArea.vue';
 
-  import { socket } from './../../utils/socket.js'
+  import MessageBubble from '@components/Bubbles/MessageBubble.vue';
+  import Icon from '@components/Icon.vue';
+
+  import { errorSnackBar } from '@utils/snackbars';
+  import { socket } from '@utils/socket.js'
+  import { useFetch } from '@utils/useFetch';
+  import { getCurrentUserId } from '@utils/utils';
 
   const route = useRoute()
 
@@ -67,6 +68,7 @@
   const state = reactive({...defaultState});
   const rules = computed(() => ({body: { maxLength: maxLength(2000), required }}));
   const v$ = useVuelidate(rules, state);
+  
   const submitForm = async () => {
     const isValid = await v$.value.$validate();
     if (!isValid) return errorSnackBar(v$.body.$errors[0]?.$message)

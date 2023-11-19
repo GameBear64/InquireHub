@@ -46,7 +46,6 @@
       
       await nextTick()
       v$.value.$reset()
-      Object.assign(state, defaultState);
     })
   };
 </script>

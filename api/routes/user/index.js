@@ -7,12 +7,15 @@ module.exports.patch = [
       name: joi.string().min(3).max(50).optional(),
       email: joi.string().min(10).max(255).optional().email(),
       biography: joi.string().min(3).max(50).optional().allow(''),
-      picture: joi.string().min(3).max(50).optional().allow(''),
+      picture: joi.string().min(3).max(5242880).optional().allow(''),
     }),
     async (req, res) => {
-    await UserModel.updateOne({ _id: req.apiUserId }, { ...req.body });
+      let userExists = await UserModel.findOne({ email: req.body.email });
+      if (userExists && userExists?._id?.toString() !== req.apiUserId) return res.status(409).json('User with this email already exists');
 
-    return res.status(200).json();
+      await UserModel.updateOne({ _id: req.apiUserId }, { ...req.body });
+
+      return res.status(200).json();
   }
 ]
 
