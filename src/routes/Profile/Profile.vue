@@ -1,26 +1,37 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+
+import QuestionBubble from '@components/Bubbles/QuestionBubble.vue';
+import Modal from '@components/Modal.vue';
 
 import { useFetch } from '@utils/useFetch';
 
-const { params } = useRoute()
+const route = useRoute()
 
 const user = ref({})
+const showFollowing = ref(false)
 
 onMounted(() => {
-  useFetch({url: `user/${params.id}`}).then((data) => {
+  useFetch({url: `user/${route.params.id}`}).then((data) => {
     user.value = data;
   })
 });
 
+watch(() => route.path, () => {
+  useFetch({url: `user/${route.params.id}`}).then((data) => {
+    user.value = data;
+  })
+  showFollowing.value = false
+})
+
 </script>
 
 <template>
-  <div class="mx-auto my-32 max-w-lg">
+  <div class="mx-auto my-24 max-w-lg">
     <img
       class="mx-auto h-32 w-32 rounded-full"
-      src="https://picsum.photos/200"
+      :src="user?.picture ? `data:image/png;base64,${user.picture}` : '../../profilePic.jpeg'"
       alt="Profile picture"
     >
     <h2 class="mt-3 text-center text-2xl font-semibold">
@@ -31,38 +42,48 @@ onMounted(() => {
       <h3 class="text-xl font-semibold">
         Biography
       </h3>
-      <p class="mt-2 text-gray-600">
-        John is a software engineer with over 10 years of experience in developing web and mobile applications. He is skilled in JavaScript, React, and Node.js.
+      <p class="mt-2">
+        {{ user.biography }}
       </p>
     </div>
     <div class="mt-4 flex p-4">
       <div class="w-1/2 text-center">
-        <span class="font-bold">1.8 k</span> Answers
+        <span class="font-bold">{{ user?.answered }}</span> Answers
       </div>
       <div class="w-0 border border-gray-300" />
-      <div class="w-1/2 text-center">
-        <span class="font-bold">2.0 k</span> Followers
+      <div
+        class="w-1/2 cursor-pointer text-center"
+        @click="() => showFollowing = true"
+      >
+        <span class="font-bold">{{ user?.following?.length }}</span> Following
       </div>
     </div>
 
     <hr>
 
     <h2 class="mt-10 text-xl font-semibold">
-      Public answers
+      Public questions
     </h2>
 
-    <div
-      v-for="i in 10"
-      :key="i"
-    >
-      <div class="my-4 break-words rounded-lg border bg-white p-4 shadow-lg">
-        <p class="mb-2 text-lg">
-          Question here
-        </p>
-        <p class="text-sm">
-          More description here. Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse vero tempora delectus!
-        </p>
-      </div>
-    </div>
+    <QuestionBubble
+      v-for="question in user.questions"
+      :key="question._id"
+      :question="question"
+    />
   </div>
+  <Modal
+    v-if="showFollowing"
+    :close="() => showFollowing = false"
+    easy-close
+    :title="`${user.name} is following:`"
+  >
+    <div
+      v-for="person in user.following"
+      :key="person._id"
+    >
+      <router-link :to="`/profile/${person._id}`">
+        {{ person.name }}
+      </router-link>
+    </div>
+  </Modal>
 </template>

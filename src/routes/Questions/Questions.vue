@@ -52,12 +52,11 @@
       >
         Ask question
       </button>
-      <div
+      <QuestionBubble
         v-for="question in questionsList"
         :key="question._id"
-      >
-        <QuestionBubble :question="question" />
-      </div>
+        :question="question"
+      />
     </template>
     <component
       :is="rightSideView"
@@ -65,7 +64,7 @@
     />
   </MainLayout>
   <Modal
-    v-show="showModal"
+    v-if="showModal"
     :close="() => showModal = false"
     title="Ask a new question"
   >

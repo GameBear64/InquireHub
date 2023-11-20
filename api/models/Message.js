@@ -15,9 +15,9 @@ const messageSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Image",
     },
-    reactions: {
-      type: [String],
-      default: [],
+    reaction: {
+      type: String,
+      default: "",
     },
   },
   { timestamps: true }

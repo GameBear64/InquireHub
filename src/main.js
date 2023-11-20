@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MainLayout from '@components/Layout/MainLayout.vue'
 
 import NotFound from '@utils/NotFound.vue'
-import { getCurrentUserId } from '@utils/utils'
+import { clickOutside, getCurrentUserId } from '@utils/utils'
 
 import Answers from './routes/Answers/Answers.vue'
 import Login from './routes/Login/Login.vue'
@@ -62,6 +62,7 @@ router.beforeEach((to, from, next) => {
 export { router } // so we can use it outside components
 
 const app = createApp(App)
+app.directive("click-outside", clickOutside)
 app.component('MainLayout', MainLayout) // just to try it out, very cool
 app.use(router)
 

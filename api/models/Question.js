@@ -13,6 +13,10 @@ const questionSchema = new mongoose.Schema(
       type: String,
       required: true
     },
+    anonymous: {
+      type: Boolean,
+      default: true
+    },
     rejected: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',

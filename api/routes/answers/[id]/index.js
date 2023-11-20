@@ -22,7 +22,7 @@ module.exports.get = [
                 from: 'messages',
                 localField: 'messages',
                 foreignField: '_id',
-                pipeline: [{ $project: { body: 1, author: 1 } }], // will need to include created and updated at
+                pipeline: [{ $project: { body: 1, author: 1, reaction: 1 } }], // will need to include created and updated at
                 as: 'messages',
               }
             },

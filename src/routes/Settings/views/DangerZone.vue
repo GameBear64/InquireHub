@@ -5,9 +5,9 @@
   import { useVuelidate } from '@vuelidate/core';
   import { required } from '@vuelidate/validators';
 
-  import Input from '@form/Input.vue';
-
   import Modal from '@components/Modal.vue';
+
+  import Input from '@form/Input.vue';
 
   import { successSnackBar } from '@utils/snackbars';
   import { useFetch } from '@utils/useFetch';
@@ -18,8 +18,8 @@
   const showDeleteModal = ref(false)
 
   const state = reactive({ password: '' });
-  const userRules = computed(() => ({ password: { required } }));
-  const v$ = useVuelidate(userRules, state);
+  const rules = computed(() => ({ password: { required } }));
+  const v$ = useVuelidate(rules, state);
 
   const logOut = () => {
     localStorage.removeItem(import.meta.env.VITE_LOCAL_STORAGE_NAME);
@@ -58,7 +58,7 @@
     </button>
   </div>
   <Modal
-    v-show="showLogOutModal"
+    v-if="showLogOutModal"
     easy-close
     :close="() => showLogOutModal = false"
     title="Are you sure about this?"
@@ -80,7 +80,7 @@
     </template>
   </Modal>
   <Modal
-    v-show="showDeleteModal"
+    v-if="showDeleteModal"
     :close="() => showDeleteModal = false"
     title="Are you sure about this?"
   >

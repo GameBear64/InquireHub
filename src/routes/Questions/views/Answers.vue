@@ -4,6 +4,9 @@
 
 <template>
   <div class="mx-auto my-5 flex w-1/2 flex-col items-center">
+    <p v-if="props.question?.answers?.length == 0">
+      Nobody has answered this question yet.
+    </p>
     <div
       v-for="answer in props.question?.answers"
       :key="answer._id"

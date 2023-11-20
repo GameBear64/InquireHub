@@ -1,14 +1,14 @@
 <script setup>
-  import { computed, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue';
+  import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue';
   import { useRoute } from 'vue-router'
 
   import { useVuelidate } from '@vuelidate/core';
   import { maxLength, required } from '@vuelidate/validators';
 
-  import ChatArea from '@form/ChatArea.vue';
-
   import MessageBubble from '@components/Bubbles/MessageBubble.vue';
   import Icon from '@components/Icon.vue';
+
+  import ChatArea from '@form/ChatArea.vue';
 
   import { errorSnackBar } from '@utils/snackbars';
   import { socket } from '@utils/socket.js'
@@ -19,6 +19,10 @@
 
   const question = reactive({})
   const messages = ref(null);
+  
+  const scrollToBottom = () => {
+    messages.value.scrollTop = messages.value.scrollHeight + 50;
+  };
 
   const fetchQuestionDetails = () => {   
     if (!route.params.id) return;
@@ -28,24 +32,16 @@
     const url = route.params?.answer ? `answers/${route.params.id}/${route.params.answer}` : `answers/${route.params.id}`
     useFetch({url}).then((data) => {
       Object.assign(question, data)
+      nextTick(() => {
+        scrollToBottom();
+      });
     })
   }
 
   watch(() => route.params, () => fetchQuestionDetails());
 
-  const scrollToBottom = () => {
-    messages.value.scrollTop = messages.value.scrollHeight + 50;
-  };
-
-  watch(question, () => {
-    nextTick(() => {
-      scrollToBottom();
-    });
-  });
-
   onMounted(() => {
     fetchQuestionDetails();
-    scrollToBottom();
     socket.on('message', ({answerId, message}) => {
       // if its the first message in the chat, the answer id had to be generated on the server
       if (!question.answer._id && message.author === getCurrentUserId()) {
@@ -55,13 +51,33 @@
 
       if (question.answer._id === answerId) {
         question.answer.messages.push(message)
+
+        nextTick(() => {
+          scrollToBottom();
+        });
       }
     })
-  })
 
-  // cleanup
-  onUnmounted(() => {
-    socket.off('message')
+    socket.on('reaction', ({answerId, messageId, reaction}) => {
+      if (question.answer._id !== answerId) return;
+
+      const foundIndex = question.answer.messages.findIndex(m => m._id === messageId)
+      question.answer.messages[foundIndex].reaction = reaction
+    })
+
+    socket.on('delete', ({answerId, messageId}) => {
+      if (question.answer._id !== answerId) return;
+
+      const foundIndex = question.answer.messages.findIndex(m => m?._id === messageId)
+      question.answer.messages.splice(foundIndex, 1)
+    })
+
+    socket.on('edit', ({answerId, messageId, body}) => {
+      if (question.answer._id !== answerId) return;
+
+      const foundIndex = question.answer.messages.findIndex(m => m?._id === messageId)
+      question.answer.messages[foundIndex].body = body
+    })
   })
 
   const defaultState = { body: '' }
@@ -75,8 +91,8 @@
 
     socket.emit('message', {...route.params, body: state.body})
 
-    await nextTick()
-    v$.value.$reset()
+    await nextTick();
+    v$.value.$reset();
     Object.assign(state, defaultState);
   };
 </script>
