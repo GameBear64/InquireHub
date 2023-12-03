@@ -25,11 +25,11 @@
 
 @layer components {
     .btn-big {
-        @apply m-auto mt-2 flex w-5/6 justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-lg font-semibold text-white transition duration-150 ease-in-out hover:bg-primary-shade focus:outline-none active:bg-primary-dark;
+        @apply m-auto mt-2 flex w-5/6 justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-lg font-semibold text-white hover:bg-primary-shade focus:outline-none active:bg-primary-dark;
     }
 
     .default-input {
-        @apply block w-full appearance-none rounded-md border bg-base border-gray-300 px-3 py-2 transition duration-150 ease-in-out placeholder:text-gray-400 focus:border-primary focus:outline-none sm:text-sm sm:leading-5
+        @apply block w-full appearance-none rounded-md border bg-base border-gray-300 px-3 py-2 placeholder:text-gray-400 focus:border-primary focus:outline-none sm:text-sm sm:leading-5
     }
 
     .text-border-white {

@@ -12,7 +12,7 @@ module.exports.get = async (req, res) => {
         foreignField: '_id',
         pipeline: [
           { $sort: { updatedAt: -1 } },
-          { $project: { message: { $slice: ['$messages', 0, 1] } } },
+          { $project: { message: { $last: '$messages' } } },
           {
             $lookup: {
               from: 'messages',

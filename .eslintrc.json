@@ -12,7 +12,7 @@
           "warn",
           {
             "groups": [
-              // `react` first then packages starting with a character
+              // `vue` first then packages starting with a character
               ["^vue$", "^[a-z]"],
               // Packages starting with `@`
               ["^@"],
