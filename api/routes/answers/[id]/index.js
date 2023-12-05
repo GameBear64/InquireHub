@@ -38,3 +38,13 @@ module.exports.get = [
     return res.status(200).json(question);
   }
 ]
+
+module.exports.delete = [
+  joiValidate({ id: joi.custom(isObjectID) }, InformationTypes.PARAMS),
+  async (req, res) => {    
+    // const question = await QuestionModel.findOne({ _id: req.params.id, seen: { '$eq': req.apiUserId } })
+
+
+    return res.status(200).json('wip');
+  }
+]

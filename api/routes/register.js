@@ -9,7 +9,7 @@ module.exports.post = [
   joiValidate({
     name: joi.string().min(3).max(50).required(),
     email: joi.string().min(10).max(255).required().email(),
-    password: joi.string().min(8).max(255).required(), //TODO: better password security
+    password: joi.string().min(8).max(255).required(),
     confirmPassword: joi.string().valid(joi.ref('password')).required(),
   }),
   async (req, res) => {

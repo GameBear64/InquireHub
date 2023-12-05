@@ -50,3 +50,8 @@ export const clickOutside = {
     document.removeEventListener("click", el.clickOutsideEvent);
   },
 };
+
+export const timeFormatter = new Intl.DateTimeFormat('en-GB', {
+  dateStyle: 'short',
+  timeStyle: 'short',
+});

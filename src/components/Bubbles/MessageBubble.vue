@@ -53,6 +53,7 @@
         'rounded-bl-none bg-gray-300' : !isAuthor
       }"
     >
+      <p class="absolute -top-4 left-1 text-xs text-onBase">Gambar</p>
       {{ props.message?.body }}
       <Icon
         class="absolute -bottom-6"

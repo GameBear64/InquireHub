@@ -50,7 +50,7 @@ watch(() => route.path, () => {
       <div class="w-1/2 text-center">
         <span class="font-bold">{{ user?.answered }}</span> Answers
       </div>
-      <div class="w-0 border border-gray-300" />
+      <div class="w-0 border border-base-subtle" />
       <div
         class="w-1/2 cursor-pointer text-center"
         @click="() => showFollowing = true"

@@ -11,7 +11,6 @@
   import { errorSnackBar } from '@utils/snackbars';
   import { socket } from '@utils/socket.js'
 
-
   const props = defineProps(["editMessageModal", "deleteMessageModal"])
   const emit = defineEmits(["closeEdit", "closeDelete"])
 

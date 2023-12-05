@@ -1,8 +1,16 @@
 <script setup>
+  import Header from '@components/Chat/Header.vue';
+
+  import AnswerBubble from '../../../components/Bubbles/AnswerBubble.vue';
+  
   const props = defineProps(['question'])
 </script>
 
 <template>
+  <Header
+    :title="props.question?.title"
+    :body="props.question?.body"
+  />
   <div class="mx-auto my-5 flex w-1/2 flex-col items-center">
     <p v-if="props.question?.answers?.length == 0">
       Nobody has answered this question yet.
@@ -12,13 +20,10 @@
       :key="answer._id"
       class="w-full"
     >
-      <router-link :to="`/question/${props.question._id}/${answer._id}`">
-        <div class="my-3 break-words rounded-lg border border-b-4 border-base-subtle border-b-primary bg-base p-2 shadow-md">
-          <p class="text-sm">
-            {{ answer.message }}
-          </p>
-        </div>
-      </router-link>
+      <AnswerBubble
+        :answer="answer"
+        :link="`/question/${props.question._id}/${answer._id}`"
+      />
     </div>
   </div>
 </template>

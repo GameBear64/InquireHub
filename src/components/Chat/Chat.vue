@@ -15,6 +15,8 @@
   import { useFetch } from '@utils/useFetch';
   import { getCurrentUserId } from '@utils/utils';
 
+  import Header from './Header.vue';
+
   const route = useRoute()
 
   const question = reactive({})
@@ -99,15 +101,10 @@
 
 <template>
   <div class="flex h-full flex-col">
-    <div class="border-b-2 border-base-subtle p-4 text-lg">
-      <h1
-        v-if="question?.title"
-        class="text-2xl font-semibold"
-      >
-        {{ question?.title }}
-      </h1>
-      <h3>{{ question?.body }}</h3>
-    </div>
+    <Header
+      :title="question.title"
+      :body="question.body"
+    />
     <div
       ref="messages"
       class="flex grow flex-col gap-6 overflow-auto p-5"

@@ -1,5 +1,5 @@
 <script setup>
-  import { onMounted, onUpdated, ref, shallowRef } from 'vue';
+  import { onMounted, onUpdated, provide, ref, shallowRef } from 'vue';
   import { useRoute } from 'vue-router'
 
   import QuestionBubble from '@components/Bubbles/QuestionBubble.vue';
@@ -23,13 +23,17 @@
     rightSideView.value = route.params?.answer ? Chat : (route.params?.id ? Answers : Nothing);
   }
 
+  const refetch = () => {
+    useFetch({url: `questions`}).then((data) => {
+      questionsList.value = data;
+    })
+  }
+  
   onUpdated(() => setRightSide());
 
   onMounted(() => {
     setRightSide();
-    useFetch({url: `questions`}).then((data) => {
-      questionsList.value = data;
-    })
+    refetch()
   });
 
   const newQuestion = (state) => {
@@ -41,6 +45,7 @@
     })
   }
 
+  provide('refetchQuestions', refetch)
 </script>
 
 <template>
