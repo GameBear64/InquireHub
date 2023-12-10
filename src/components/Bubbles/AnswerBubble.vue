@@ -38,6 +38,7 @@
         </div>
         <Icon
           icon="delete"
+          class="hover:text-primary"
           @click.prevent="() => showModal = true"
         />
       </div>

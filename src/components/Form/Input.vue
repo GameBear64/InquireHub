@@ -17,6 +17,7 @@
         :name="props.label"
         :value="modelValue"
         v-bind="$attrs"
+        autocomplete="on"
         class="default-input"
         :class="{'border-red-500 focus:border-red-200': props.error}"
         @input="emit('update:modelValue', $event.target.value)"

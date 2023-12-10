@@ -48,6 +48,7 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
+  linkActiveClass: 'border-b border-primary',
   routes,
 })
 

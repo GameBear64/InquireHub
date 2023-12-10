@@ -20,7 +20,7 @@
   </h2>
   <hr class="my-2 border-b border-primary">
 
-  <div class="flex flex-wrap items-center justify-between">
+  <div class="my-5 flex flex-wrap items-center justify-between">
     <div class="flex gap-2">
       <button
         class="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-300 text-black"

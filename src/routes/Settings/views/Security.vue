@@ -45,7 +45,10 @@
   </h2>
   <hr class="my-2 border-b border-primary">
 
-  <form @submit.prevent="submitForm">
+  <form
+    class="my-5"
+    @submit.prevent="submitForm"
+  >
     <Input 
       v-model="state.password"
       label="Old password"
@@ -72,7 +75,7 @@
       />
     </div>
       
-    <button class="btn-big mt-10 w-52">
+    <button class="btn-big mt-5 w-52">
       Update
     </button>
   </form>

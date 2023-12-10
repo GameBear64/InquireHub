@@ -23,7 +23,7 @@
   const messages = ref(null);
   
   const scrollToBottom = () => {
-    messages.value.scrollTop = messages.value.scrollHeight + 50;
+    messages.value.scrollTop = messages?.value?.scrollHeight + 50;
   };
 
   const fetchQuestionDetails = () => {   

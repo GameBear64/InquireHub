@@ -7,6 +7,8 @@
   import Icon from '@components/Icon.vue';
   import Modal from '@components/Modal.vue';
 
+  import Input from '@form/Input.vue';
+
   import { errorSnackBar, successSnackBar } from '@utils/snackbars';
   import { useFetch } from '@utils/useFetch';
 
@@ -46,13 +48,13 @@
   <div class="flex justify-evenly rounded-b-lg border border-base-subtle bg-base p-1">
     <Icon
       icon="edit"
-      class="cursor-pointer"
+      class="cursor-pointer hover:text-primary"
       @click="() => editMessageModal = true"
     />
     <div class="w-0 border border-base-subtle" />
     <Icon
       icon="delete"
-      class="cursor-pointer"
+      class="cursor-pointer hover:text-primary"
       @click="() => deleteMessageModal = true"
     /> 
   </div>
@@ -74,7 +76,7 @@
         Cancel
       </button>
       <button
-        class="btn-big ml-5 bg-green-600 hover:bg-green-700 active:bg-green-900"
+        class="btn-big ml-5"
         @click="editQuestion"
       >
         Update

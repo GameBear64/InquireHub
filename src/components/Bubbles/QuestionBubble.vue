@@ -3,6 +3,7 @@
 
   import Icon from '../Icon.vue';
 
+import AnswerButtons from './views/AnswerButtons.vue';
   import QuestionButtons from './views/QuestionButtons.vue';
 
   const props = defineProps(['question', 'link'])
@@ -26,16 +27,25 @@
         <p class="text-sm">
           {{ props.question.body }}
         </p>
-        <Icon
-          icon="more_horiz"
-          class="w-full pr-1 text-end"
-          @click.prevent="() => moreOptions = !moreOptions"
-        />
+        <div class="w-full pr-1 text-end">
+          <Icon
+            icon="more_horiz"
+            @click.prevent="() => moreOptions = !moreOptions"
+          />
+        </div>
       </div>
     </router-link>
-    <QuestionButtons
-      v-if="moreOptions"
-      :question="props.question"
-    />
+    <div v-if="props?.link?.includes('answer')">
+      <AnswerButtons 
+        v-if="moreOptions"
+        :question="props.question"
+      />
+    </div>
+    <div v-else>
+      <QuestionButtons
+        v-if="moreOptions"
+        :question="props.question"
+      />
+    </div>
   </div>
 </template>

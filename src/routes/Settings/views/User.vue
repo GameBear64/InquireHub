@@ -55,7 +55,10 @@
     User Details
   </h2>
   <hr class="my-2 border-b border-primary">
-  <form @submit.prevent="submitForm">
+  <form
+    class="my-5"
+    @submit.prevent="submitForm"
+  >
     <Input 
       v-model="state.name"
       label="Name"
@@ -84,7 +87,7 @@
       :error="v$.picture.$errors[0]?.$message"
     />
 
-    <Submit class="mt-10 w-52">
+    <Submit class="mt-5 w-52">
       Save
     </submit>
   </form>

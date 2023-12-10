@@ -1,5 +1,5 @@
 <script setup>
-  import { onMounted, ref } from 'vue';
+  import { onMounted, provide, ref } from 'vue';
   import { useRoute } from 'vue-router'
 
   import QuestionBubble from '@components/Bubbles/QuestionBubble.vue';
@@ -10,6 +10,12 @@
   const route = useRoute()
 
   const answerList = ref([])
+
+  const refetch = () => {
+    useFetch({url: `answers`}).then((data) => {
+      answerList.value = data;
+    })
+  }
 
   onMounted(() => {
     useFetch({url: `answers`}).then((data) => {
@@ -22,6 +28,8 @@
       answerList.value.unshift({...data, new: true});
     })
   }
+
+  provide('refetchQuestions', refetch)
 </script>
 
 <template>

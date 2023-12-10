@@ -1,13 +1,19 @@
 <script setup>
+import { useRoute } from 'vue-router'
+
 import { getCurrentUserId } from '../../utils/utils'
 import Icon from '../Icon.vue'
+
+// due to a bug with the router's optional params, I will match the path here
+const route = useRoute()
 </script>
 
 <template>
   <nav class="flex h-12 w-full items-center justify-between border-b border-base-subtle bg-base px-4 shadow">
-    <div class="flex h-11 items-center gap-5 text-primary">
+    <div class="flex h-11 items-center gap-5">
       <router-link
         class="inline-block p-2 text-lg font-medium no-underline hover:bg-base-subtle hover:text-onBase"
+        :class="{'border-b border-primary': route.path.includes('question')}"
         to="/questions"
       >
         Questions
@@ -15,6 +21,7 @@ import Icon from '../Icon.vue'
       <router-link
         class="inline-block p-2 text-lg font-medium no-underline hover:bg-base-subtle hover:text-onBase"
         to="/answers"
+        :class="{'border-b border-primary': route.path.includes('answer')}"
       >
         Answers
       </router-link>

@@ -17,10 +17,6 @@ const questionSchema = new mongoose.Schema(
       type: Boolean,
       default: true
     },
-    rejected: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-    }],
     seen: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',

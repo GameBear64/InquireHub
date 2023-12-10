@@ -42,16 +42,16 @@
   </h2>
   <hr class="my-2 border-b border-primary">
 
-  <div class="my-10 flex gap-10">
+  <div class="my-5 flex gap-10">
     <button
-      class="btn-big border-2 border-rose-400 bg-base text-onBase hover:bg-base-moderate active:bg-rose-400"
+      class="btn-big border-2 border-red-500 bg-base text-onBase hover:bg-base-moderate active:bg-red-600"
       @click="() => showLogOutModal = true"
     >
       Log out
     </button>
 
     <button
-      class="btn-big border-2 border-red-500 bg-base text-onBase hover:bg-base-moderate active:bg-red-500"
+      class="btn-big border-2 border-red-500 bg-base text-onBase hover:bg-base-moderate active:bg-red-600"
       @click="() => showDeleteModal = true"
     >
       Delete account
@@ -72,7 +72,7 @@
         Cancel
       </button>
       <button
-        class="btn-big ml-5 bg-rose-500 hover:bg-rose-600 active:bg-rose-900"
+        class="btn-big ml-5 bg-red-500 hover:bg-red-600 active:bg-red-900"
         @click="logOut"
       >
         Log out
@@ -103,7 +103,7 @@
         Cancel
       </button>
       <button
-        class="btn-big ml-5 bg-rose-500 hover:bg-rose-600 active:bg-rose-900"
+        class="btn-big ml-5 bg-red-500 hover:bg-red-600 active:bg-red-900"
         @click="deleteAccount"
       >
         Delete account

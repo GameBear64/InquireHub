@@ -53,7 +53,7 @@
         Cancel
       </button>
       <button
-        class="btn-big ml-5 bg-green-600 hover:bg-green-700 active:bg-green-900"
+        class="btn-big ml-5"
         @click="editMessage"
       >
         Update

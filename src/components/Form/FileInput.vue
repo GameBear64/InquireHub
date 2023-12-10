@@ -12,6 +12,7 @@
     const base64Image = await readFile(image)
     emit('update:modelValue', base64Image)
   }
+
 </script>
 
 <template>
