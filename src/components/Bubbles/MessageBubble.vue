@@ -3,11 +3,12 @@
 
   import Icon from '@components/Icon.vue';
 
-  import { getCurrentUserId } from '@utils/utils';
+  import { useUserStore } from '@utils/store';
 
   import Modals from './views/Modals.vue';
   import Reactions from './views/Reactions.vue';
   
+  const { userId } = useUserStore()
   const props = defineProps(['message'])
 
   provide('message', props.message)
@@ -17,8 +18,7 @@
   const editMessageModal = ref(false);
   const deleteMessageModal = ref(false);
 
-  const userId = getCurrentUserId()
-  const isAuthor = computed(() => props.message?.author?._id === userId)
+  const isAuthor = computed(() => props.message?.author === userId || props.message?.author?._id === userId)
 
   const getReactionColor = (reaction) => {
     switch (reaction) {
@@ -46,6 +46,14 @@
       addReactionModal = false
     }"
   >
+    <p
+      class="text-xs text-onBase"
+      :class="{'hidden': isAuthor || !props.message?.author}"
+    >
+      <router-link :to="`/profile/${props.message?.author?._id}`">
+        {{ props.message?.author?.name }}
+      </router-link>
+    </p>
     <div
       class="flex items-center"
       :class="{'flex-row-reverse ': isAuthor}"
@@ -57,14 +65,6 @@
           'rounded-bl-none bg-gray-300' : !isAuthor
         }"
       >
-        <p
-          class="absolute -top-4 left-1 text-xs text-onBase"
-          :class="{'hidden': isAuthor || !props.message?.author}"
-        >
-          <router-link :to="`/profile/${props.message?.author?._id}`">
-            {{ props.message?.author?.name }}
-          </router-link>
-        </p>
         {{ props.message?.body }}
       </span>
       <Reactions v-if="addReactionModal" />

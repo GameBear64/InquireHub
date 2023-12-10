@@ -1,11 +1,14 @@
 <script setup>
 import { useRoute } from 'vue-router'
 
-import { getCurrentUserId } from '../../utils/utils'
+import { useUserStore } from '@utils/store';
+
 import Icon from '../Icon.vue'
 
 // due to a bug with the router's optional params, I will match the path here
 const route = useRoute()
+
+const { userId } = useUserStore()
 </script>
 
 <template>
@@ -29,7 +32,7 @@ const route = useRoute()
     <div class="flex h-11 items-center gap-4">
       <router-link
         class="px-2 py-1 hover:bg-base-subtle hover:text-onBase"
-        :to="`/profile/${getCurrentUserId()}`"
+        :to="`/profile/${userId}`"
       >
         <Icon
           class="text-3xl"

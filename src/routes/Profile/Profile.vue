@@ -5,18 +5,20 @@ import { useRoute } from 'vue-router'
 import QuestionBubble from '@components/Bubbles/QuestionBubble.vue';
 import Modal from '@components/Modal.vue';
 
+import { useUserStore } from '@utils/store';
 import { useFetch } from '@utils/useFetch';
-import { getCurrentUserId } from '@utils/utils';
 
 import FollowBtn from './views/FollowBtn.vue';
 
 const route = useRoute()
 
+const { userId } = useUserStore()
+
 const user = ref({})
 const showFollowing = ref(false)
 
 const refetch = () => {
-  useFetch({url: `user/${route.params.id}`}).then((data) => {
+  useFetch({url: `user/${route.params?.id}`}).then((data) => {
     user.value = data;
   })
 }
@@ -24,6 +26,7 @@ const refetch = () => {
 onMounted(() => refetch());
 
 watch(() => route.path, () => {
+  if (!route.path.includes('profile')) return;  
   refetch()
   showFollowing.value = false
 })
@@ -42,7 +45,7 @@ watch(() => route.path, () => {
     </h2>
     
     <div
-      v-if="route.params.id !== getCurrentUserId()"
+      v-if="route.params.id !== userId"
       class="my-4 flex w-full justify-center"
     >
       <FollowBtn
@@ -87,6 +90,7 @@ watch(() => route.path, () => {
       v-for="question in user.publicQuestions"
       :key="question._id"
       :question="question"
+      :link="question?.author === userId ? `/question/${question?._id}` : `/answer/${question?._id}`"
     />
   </div>
   <Modal

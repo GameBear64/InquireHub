@@ -9,15 +9,14 @@ const { answer } = require('../../../reusable/aggregations')
 module.exports.get = [
   joiValidate({ id: joi.custom(isObjectID) }, InformationTypes.PARAMS),
   async (req, res) => {    
-    // const question = await QuestionModel.findOne({ _id: req.params.id, seen: { '$eq': req.apiUserId } })
 
     const [ question ] = await QuestionModel.aggregate([
-      { $match: { _id: ObjectId(req.params.id), seen: { '$eq': ObjectId(req.apiUserId) } }},
+      { $match: { _id: ObjectId(req.params.id) }},
       ...answer
     ])
 
-    if (question.anonymous) {
-      question.answer.messages = question.answer.messages.map(message => ({
+    if (question?.anonymous) {
+      question.answer.messages = question?.answer?.messages?.map(message => ({
         ...message, author: message.author._id.toString() === req.apiUserId ? message.author : null,
       }))
     }

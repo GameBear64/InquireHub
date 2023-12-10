@@ -10,8 +10,11 @@
   import TextArea from '@form/TextArea.vue';
 
   import { successSnackBar } from '@utils/snackbars';
+  import { useUserStore } from '@utils/store';
   import { useFetch } from '@utils/useFetch';
-  import { cleanObject, getCurrentUserId } from '@utils/utils';
+  import { cleanObject } from '@utils/utils';
+
+  const { userId } = useUserStore()
 
   const defaultState = {
     name: '',
@@ -23,7 +26,7 @@
   const state = reactive({...defaultState});
   
   onMounted(() => {
-    useFetch({url: `user/${getCurrentUserId()}`}).then((data) => {
+    useFetch({url: `user/${userId}`}).then((data) => {
       Object.assign(state, cleanObject(data, ['name', 'email', 'biography', 'picture']))
     })
   });

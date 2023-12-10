@@ -32,6 +32,7 @@ module.exports.get = async (req, res) => {
         as: 'answers',
       }
     },
+    { $project: { seen: 0 } },
   ])
 
   return res.status(200).json(list);

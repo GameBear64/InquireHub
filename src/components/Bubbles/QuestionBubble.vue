@@ -1,11 +1,14 @@
 <script setup>
   import { ref } from 'vue'
 
+  import { useUserStore } from '@utils/store';
+
   import Icon from '../Icon.vue';
 
-import AnswerButtons from './views/AnswerButtons.vue';
+  import AnswerButtons from './views/AnswerButtons.vue';
   import QuestionButtons from './views/QuestionButtons.vue';
 
+  const { userId } = useUserStore()
   const props = defineProps(['question', 'link'])
 
   const moreOptions = ref(false);
@@ -27,12 +30,19 @@ import AnswerButtons from './views/AnswerButtons.vue';
         <p class="text-sm">
           {{ props.question.body }}
         </p>
-        <div class="w-full pr-1 text-end">
+        <div
+          v-if="props.question?.author === userId"
+          class="w-full pr-1 text-end"
+        >
           <Icon
             icon="more_horiz"
             @click.prevent="() => moreOptions = !moreOptions"
           />
         </div>
+        <div
+          v-else
+          class="h-3"
+        />
       </div>
     </router-link>
     <div v-if="props?.link?.includes('answer')">

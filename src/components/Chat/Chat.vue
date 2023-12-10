@@ -12,21 +12,22 @@
 
   import { errorSnackBar } from '@utils/snackbars';
   import { socket } from '@utils/socket.js'
+  import { useUserStore } from '@utils/store';
   import { useFetch } from '@utils/useFetch';
-  import { getCurrentUserId } from '@utils/utils';
 
   import Header from './Header.vue';
 
   const route = useRoute()
+  const { userId } = useUserStore()
 
   const question = reactive({})
   const messages = ref(null);
   
   const scrollToBottom = () => {
-    messages.value.scrollTop = messages?.value?.scrollHeight + 50;
+    if (messages?.value) messages.value.scrollTop = messages?.value?.scrollHeight + 50;
   };
 
-  const fetchQuestionDetails = () => {   
+  const fetchQuestionDetails = () => {
     if (!route.params.id) return;
     if (!!route.path.includes('question') && !route.params?.answer) return;
     Object.assign(question, {})
@@ -44,9 +45,10 @@
 
   onMounted(() => {
     fetchQuestionDetails();
+    
     socket.on('message', ({answerId, message}) => {
       // if its the first message in the chat, the answer id had to be generated on the server
-      if (!question.answer._id && message.author === getCurrentUserId()) {
+      if (!question.answer._id && message.author === userId) {
         question.answer._id = answerId
         question.answer.messages = []
       }
@@ -109,6 +111,12 @@
       ref="messages"
       class="flex grow flex-col gap-6 overflow-auto p-5"
     >
+      <p
+        v-if="!question?.answer?.messages?.length || question?.answer?.messages.length === 0"
+        class="my-5 text-center"
+      >
+        No messages have been sent here.... yet!
+      </p>
       <MessageBubble
         v-for="message in question?.answer?.messages"
         :key="message?._id"

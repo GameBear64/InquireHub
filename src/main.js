@@ -1,4 +1,5 @@
 import { createApp, reactive } from 'vue'
+import { createPinia } from 'pinia'
 import { createRouter, createWebHistory } from 'vue-router'
 
 import MainLayout from '@components/Layout/MainLayout.vue'
@@ -16,6 +17,7 @@ import App from './App.vue'
 
 import './style.css'
 
+// this reactive signal can be used as a global state as well (no dependencies required)
 export const themes = reactive({
   mode: localStorage.getItem('theme-mode') || 'dark',
   color: localStorage.getItem('theme-color') || 'orange'
@@ -63,6 +65,9 @@ router.beforeEach((to, from, next) => {
 export { router } // so we can use it outside components
 
 const app = createApp(App)
+const pinia = createPinia()
+
+app.use(pinia)
 app.directive("click-outside", clickOutside)
 app.component('MainLayout', MainLayout) // just to try it out, very cool
 app.use(router)

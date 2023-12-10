@@ -5,6 +5,10 @@ const { MessageModel } = require('../models/Message');
 module.exports = async ({ io, socket }, data) => {
   const question = await QuestionModel.findOne({_id: data.id}).populate('answers', 'author')
   if (!question) return socket.emit('error', question);
+  
+  if (!question.seen.includes(socket.apiUserId)) {
+    await question.updateOne({ $push: { seen: socket.apiUserId } });
+  }
 
   let tempAnswer
   

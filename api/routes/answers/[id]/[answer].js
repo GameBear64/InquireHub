@@ -17,7 +17,7 @@ module.exports.get = [
       ...answer
     ])
     
-    if (question.anonymous) {
+    if (question?.anonymous) {
       question.answer.messages = question.answer.messages.map(({author, ...rest}) => ({
         ...rest, author: author._id.toString() === req.apiUserId ? author : null 
       }))
