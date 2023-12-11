@@ -19,6 +19,11 @@ npm run dev
 You should see something like this:
 ![example](https://github.com/GameBear64/InquireHub/assets/33098072/38694029-c81e-4de7-af6f-8d81c6d0c10c)
 
+## Purpouse
+This is a platform meant to provide anonymity when asking questions.  
+  
+The concept is simple, you ask a question and then periodically check if you have answers from people. Other than asking questions you can answer questions. The more you answer the more the number on your profile goes up so you can show off to others how cool you are.  
+If you find someone cool that posts interesting public questions, you can also follow them and answer their questions without relying on chance to stumble upon them. Beware tho, you can only see their public questions.
 
 
 ## Features
