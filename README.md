@@ -2,10 +2,17 @@
 
 # Inquire Hub
 > Share Your Thoughts, Spark Conversations!
-  
-A simple chat app for anonymous questions and answers featuring profiles and auth guards, themes, real time updates, form validations and more!
+
+A simple chat app for anonymous questions and answers featuring profiles and auth guards, themes, real time updates, form validations and more!  
 
 ## Instalation
+
+Noteworthy dependencies:  
+
+[![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)](https://vuejs.org/) [![Vuelidate](https://img.shields.io/badge/Vuelidate-589A6F?style=for-the-badge&logo=verizon&logoColor=white)](https://vuelidate-next.netlify.app/) [![Pinia](https://img.shields.io/badge/pinia-FFD859?style=for-the-badge)](https://pinia.vuejs.org/) [![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)  
+[![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)](https://socket.io/) [![jwt](https://img.shields.io/badge/json%20web%20tokens-323330?style=for-the-badge&logo=json-web-tokens&logoColor=pink)](https://jwt.io/)  
+[![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)](https://expressjs.com) [![joi](https://img.shields.io/badge/joi-0080FF?style=for-the-badge)](https://joi.dev/) [![Bcrypt](https://img.shields.io/badge/bcrypt-FFBF00?style=for-the-badge&logo=letsencrypt&logoColor=black)](https://www.npmjs.com/package/bcrypt) [![Glob](https://img.shields.io/badge/GLOB-774AB7?style=for-the-badge&logoColor=white)](https://www.npmjs.com/package/glob) [![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+
 When installing all the app's dependencies youll need to run these two commands
 ```bash
 npm i
@@ -36,6 +43,7 @@ Main dependencies:
 - awesome-snackbar
 - Tailwind
 - Material Icons
+- Pinia
 
 The front end features a combination of light and dark theme + an accent color
 ![inquire-hub-themes](https://github.com/GameBear64/InquireHub/assets/33098072/5a5e43e4-a16b-44a3-b0ec-17d80d6aeeec)
