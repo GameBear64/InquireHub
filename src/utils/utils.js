@@ -1,3 +1,5 @@
+import emojiList from './emojis.json'
+
 /**
  * Gets the current user's ID from a stored token.
  */
@@ -35,23 +37,20 @@ export const cleanObject = (object, desiredFields) => {
   return Object.assign({}, ...desiredFields.map((field) => ([field] in object ? { [field]: object[field] } : {})));
 };
 
-export const clickOutside = {
-  beforeMount: (el, binding) => {
-    el.clickOutsideEvent = event => {
-      // here I check that click was outside the el and his children
-      if (!(el == event.target || el.contains(event.target))) {
-        // and if it did, call method provided in attribute value
-        binding.value();
-      }
-    };
-    document.addEventListener("click", el.clickOutsideEvent);
-  },
-  unmounted: el => {
-    document.removeEventListener("click", el.clickOutsideEvent);
-  },
-};
-
 export const timeFormatter = new Intl.DateTimeFormat('en-GB', {
   dateStyle: 'short',
   timeStyle: 'short',
 });
+
+export const emojiParser = (string) => {
+  const foundEmojis = [...string.matchAll(/:(\w+):/gim)];
+
+  foundEmojis?.forEach(emote => {
+    const replacement = emojiList[emote[1]];
+    if (!replacement) return;
+
+    string = string.replace(emote[0], replacement);
+  });
+
+  return string;
+}

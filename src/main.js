@@ -5,7 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MainLayout from '@components/Layout/MainLayout.vue'
 
 import NotFound from '@utils/NotFound.vue'
-import { clickOutside, getCurrentUserId } from '@utils/utils'
+import { getCurrentUserId } from '@utils/utils'
 
 import Answers from './routes/Answers/Answers.vue'
 import Login from './routes/Login/Login.vue'
@@ -68,7 +68,6 @@ const app = createApp(App)
 const pinia = createPinia()
 
 app.use(pinia)
-app.directive("click-outside", clickOutside)
 app.component('MainLayout', MainLayout) // just to try it out, very cool
 app.use(router)
 

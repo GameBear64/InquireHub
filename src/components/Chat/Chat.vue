@@ -125,7 +125,7 @@
     </div>
     <div class="flex items-center justify-evenly bg-base-moderate">
       <ChatArea
-        v-model="state.body" 
+        v-model="state.body"
         class="grow bg-base-moderate"
         @keydown.enter.exact.prevent="submitForm"
       />
