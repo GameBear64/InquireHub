@@ -30,9 +30,9 @@ module.exports.delete = [
   async (req, res) => {
     // allow owner of question to delete as well
     const answer = await AnswerModel.findOne({_id: ObjectId(req.params.id)})
-    const question = await AnswerModel.findOne({_id: ObjectId(req.params.id)})
+    const question = await QuestionModel.findOne({answers: {$in : ObjectId(req.params.id)}})
 
-    if (answer.author !== req.apiUserId ) return res.status(404).json()
+    if (answer.author.toString() !== req.apiUserId && question.author.toString() !== req.apiUserId) return res.status(404).json()
 
     await answer.deleteOne()
 
