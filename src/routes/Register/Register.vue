@@ -8,6 +8,7 @@ import { email, helpers,maxLength, minLength, required, sameAs } from '@vuelidat
 import Input from '@components/Form/Input.vue';
 import Submit from '@components/Form/Submit.vue';
 
+import { useUserStore } from '@utils/store';
 import { useFetch } from '@utils/useFetch'
 
 const router = useRouter()
@@ -35,6 +36,7 @@ const submitForm = async () => {
 
   useFetch({url: 'register', method: 'POST', body: state, requireAuth: false}).then((data) => {
     localStorage.setItem(import.meta.env.VITE_LOCAL_STORAGE_NAME, data);
+    useUserStore.refresh()
     router.push('/');
   })
 };

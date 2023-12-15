@@ -1,5 +1,5 @@
 <script setup>
-  import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue';
+  import { computed, inject, nextTick, onMounted, reactive, ref, watch } from 'vue';
   import { useRoute } from 'vue-router'
 
   import { useVuelidate } from '@vuelidate/core';
@@ -19,6 +19,7 @@
 
   const route = useRoute()
   const { userId } = useUserStore()
+  const refetchQuestions = inject('refetchQuestions')
 
   const question = reactive({})
   const messages = ref(null);
@@ -47,6 +48,8 @@
     fetchQuestionDetails();
     
     socket.on('message', ({answerId, message}) => {
+      if (!question.answer._id && message.author !== userId) refetchQuestions()
+      
       // if its the first message in the chat, the answer id had to be generated on the server
       if (!question.answer._id && message.author === userId) {
         question.answer._id = answerId
