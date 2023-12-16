@@ -12,6 +12,7 @@ import { useUserStore } from '@utils/store';
 import { useFetch } from '@utils/useFetch'
 
 const router = useRouter()
+const store = useUserStore()
 
 const state = reactive({
   name: '',
@@ -36,7 +37,7 @@ const submitForm = async () => {
 
   useFetch({url: 'register', method: 'POST', body: state, requireAuth: false}).then((data) => {
     localStorage.setItem(import.meta.env.VITE_LOCAL_STORAGE_NAME, data);
-    useUserStore.refresh()
+    store.refresh()
     router.push('/');
   })
 };
